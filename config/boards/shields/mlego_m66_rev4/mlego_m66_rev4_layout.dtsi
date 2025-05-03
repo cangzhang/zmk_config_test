@@ -98,8 +98,8 @@
 
       m66: m66_0 {
         compatible = "zmk,matrix-transform";
-        columns = <14>;
-        rows = <5>;
+        columns = <16>;
+        rows = <8>;
 /*
 ┌────┐
 │ 0N │
