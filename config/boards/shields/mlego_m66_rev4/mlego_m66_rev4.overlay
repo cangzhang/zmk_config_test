@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2022-2024 alin m elena
- * SPDX-License-Identifier: MIT
- */
-
 #include "mlego_m66_rev4_layout.dtsi"
 
 / {
@@ -18,36 +13,38 @@
 
    chosen {
      zmk,physical-layout = &m66_layout;
-/*
-     zephyr,console = &cdc_acm_uart;
-*/
    };
 
    kscan_m66: kscan_m66 {
      compatible = "zmk,kscan-gpio-matrix";
      diode-direction = "col2row";
      wakeup-source; 
-     col-gpios =   <&shift_reg 2  (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 9  (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 10 (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 11 (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 12 (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 13 (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 14 (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 15 (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 3  (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 4  (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 5  (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 6  (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 7  (GPIO_ACTIVE_HIGH)>
-                 , <&shift_reg 1  (GPIO_ACTIVE_HIGH)>
-                 ;
-     row-gpios =   <&pro_micro 0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-                 , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-                 , <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-                 , <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-                 , <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-                 ;
+     col-gpios = <
+          <&pro_micro 1  (GPIO_ACTIVE_HIGH)>,   /* C0  → P1.01 */
+          <&pro_micro 2  (GPIO_ACTIVE_HIGH)>,   /* C1  → P1.02 */
+          <&pro_micro 7  (GPIO_ACTIVE_HIGH)>,   /* C2  → P1.07 */
+          <&pro_micro 9  (GPIO_ACTIVE_HIGH)>,   /* C3  → P0.09 */
+          <&pro_micro 10 (GPIO_ACTIVE_HIGH)>,   /* C4  → P0.10 */
+          <&pro_micro 11 (GPIO_ACTIVE_HIGH)>,   /* C5  → P1.11 */
+          <&pro_micro 6  (GPIO_ACTIVE_HIGH)>,   /* C6  → P1.06 */
+          <&pro_micro 4  (GPIO_ACTIVE_HIGH)>,   /* C7  → P1.04 */
+          <&pro_micro 11 (GPIO_ACTIVE_HIGH)>,   /* C8  → P0.11 */
+          <&pro_micro 0  (GPIO_ACTIVE_HIGH)>,   /* C9  → P1.00 */
+          <&pro_micro 24 (GPIO_ACTIVE_HIGH)>,   /* C10 → P0.24 */
+          <&pro_micro 22 (GPIO_ACTIVE_HIGH)>,   /* C11 → P0.22 */
+          <&pro_micro 20 (GPIO_ACTIVE_HIGH)>,   /* C12 → P0.20 */
+          <&pro_micro 6  (GPIO_ACTIVE_HIGH)>,   /* C13 → P0.06 */
+          <&pro_micro 17 (GPIO_ACTIVE_HIGH)>,   /* C14 → P0.17 */
+          <&pro_micro 8  (GPIO_ACTIVE_HIGH)>;   /* C15 → P0.08 */
+     row-gpios = 
+            <&shift_reg 0 (GPIO_ACTIVE_HIGH)>,  /* R0 → QA */
+            <&shift_reg 1 (GPIO_ACTIVE_HIGH)>,  /* R1 → QB */
+            <&shift_reg 2 (GPIO_ACTIVE_HIGH)>,  /* R2 → QC */
+            <&shift_reg 3 (GPIO_ACTIVE_HIGH)>,  /* R3 → QD */
+            <&shift_reg 4 (GPIO_ACTIVE_HIGH)>,  /* R4 → QE */
+            <&shift_reg 5 (GPIO_ACTIVE_HIGH)>,  /* R5 → QF */
+            <&shift_reg 6 (GPIO_ACTIVE_HIGH)>,  /* R6 → QG */
+            <&shift_reg 7 (GPIO_ACTIVE_HIGH)>;  /* R7 → QH */
    };
 };
 
@@ -81,7 +78,7 @@ board_spi: &spi0 {
   pinctrl-0 = <&spi0_default>;
   pinctrl-1 = <&spi0_sleep>;
   pinctrl-names = "default", "sleep";
-  cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW> ;
+  cs-gpios = <&pro_micro 15 GPIO_ACTIVE_HIGH>;  /* RCLK → P1.15 */
 
   shift_reg: 595@0 {
     compatible = "zmk,gpio-595";
@@ -90,6 +87,6 @@ board_spi: &spi0 {
     spi-max-frequency = <2000000>;
     #gpio-cells = <2>;
     reg = <0>;
-    ngpios = <16>;
+    ngpios = <8>;
   };
 };
