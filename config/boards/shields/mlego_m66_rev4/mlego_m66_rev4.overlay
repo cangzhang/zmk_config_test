@@ -17,7 +17,7 @@
 
    kscan_m66: kscan_m66 {
      compatible = "zmk,kscan-gpio-matrix";
-     diode-direction = "row2col";
+     diode-direction = "col2row";
      wakeup-source; 
      col-gpios = 
           <&gpio1 1  (GPIO_ACTIVE_HIGH)>,   /* C0  → P1.01 */
@@ -37,14 +37,14 @@
           <&gpio0 17 (GPIO_ACTIVE_HIGH)>,   /* C14 → P0.17 */
           <&gpio0 8  (GPIO_ACTIVE_HIGH)>;   /* C15 → P0.08 */
      row-gpios = 
-          <&shift_reg 0 (GPIO_ACTIVE_HIGH)>,  /* R0 → QA */
-          <&shift_reg 1 (GPIO_ACTIVE_HIGH)>,  /* R1 → QB */
-          <&shift_reg 2 (GPIO_ACTIVE_HIGH)>,  /* R2 → QC */
-          <&shift_reg 3 (GPIO_ACTIVE_HIGH)>,  /* R3 → QD */
-          <&shift_reg 4 (GPIO_ACTIVE_HIGH)>,  /* R4 → QE */
-          <&shift_reg 5 (GPIO_ACTIVE_HIGH)>,  /* R5 → QF */
-          <&shift_reg 6 (GPIO_ACTIVE_HIGH)>,  /* R6 → QG */
-          <&shift_reg 7 (GPIO_ACTIVE_HIGH)>;  /* R7 → QH */
+          <&shift_reg 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* R0 → QA */
+          <&shift_reg 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* R1 → QB */
+          <&shift_reg 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* R2 → QC */
+          <&shift_reg 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* R3 → QD */
+          <&shift_reg 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* R4 → QE */
+          <&shift_reg 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* R5 → QF */
+          <&shift_reg 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* R6 → QG */
+          <&shift_reg 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  /* R7 → QH */
    };
 };
 
@@ -78,7 +78,7 @@ board_spi: &spi0 {
   pinctrl-0 = <&spi0_default>;
   pinctrl-1 = <&spi0_sleep>;
   pinctrl-names = "default", "sleep";
-  cs-gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;  /* RCLK → P1.15 */
+  cs-gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;  /* RCLK → P1.15 */
 
   shift_reg: 595@0 {
     compatible = "zmk,gpio-595";
