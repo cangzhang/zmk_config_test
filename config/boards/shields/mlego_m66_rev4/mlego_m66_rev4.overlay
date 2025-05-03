@@ -1,7 +1,7 @@
 #include "mlego_m66_rev4_layout.dtsi"
 
 / {
-   model = "mlego m66, rev4";
+   model = "minila air";
 
    //compatible = "nice-nano-v2";
 
