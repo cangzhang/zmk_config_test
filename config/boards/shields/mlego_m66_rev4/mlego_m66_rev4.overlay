@@ -5,7 +5,6 @@
 
    m66_layout: m66_layout {
         compatible = "zmk,physical-layout";
-        display-name = "m66 default layout";
         kscan = <&kscan_m66>;
    };
 
@@ -17,6 +16,8 @@
      compatible = "zmk,kscan-gpio-matrix";
      diode-direction = "col2row";
      wakeup-source; 
+     debounce-press-ms = <10>;
+     debounce-release-ms = <10>;
      col-gpios = 
           <&gpio1 1  (GPIO_ACTIVE_HIGH)>,   /* C0  → P1.01 */
           <&gpio1 2  (GPIO_ACTIVE_HIGH)>,   /* C1  → P1.02 */
